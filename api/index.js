@@ -20,15 +20,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
    cors({
-     credentials: true,
-     origin: [
-       "http://localhost:5173",  // Local frontend for development
-       "https://steady-choux-d05d47.netlify.app/"  // Deployed frontend on Vercel
-     ],
+      credentials: true,
+      origin: ["http://localhost:5173", "https://steady-choux-d05d47.netlify.app/"],
    })
- );
+);
 
 mongoose.connect(process.env.MONGO_URL);
+
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {
       cb(null, "uploads/");
@@ -257,5 +255,5 @@ app.delete("/tickets/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}`);
+   console.log(Server is running on port ${PORT});
 });
