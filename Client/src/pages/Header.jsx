@@ -46,6 +46,8 @@ export default function Header() {
     await axios.post('/logout');
     setUser(null);
   }
+
+  const [showDropdown, setShowDropdown] = useState(false);
 //! Search input ----------------------------------------------------------------
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -56,7 +58,7 @@ export default function Header() {
       <header className='flex py-2 px-6 sm:px-6 justify-between place-items-center'>
           
           <Link to={'/'} className="flex item-center ">
-            <img src="../src/assets/logo.png" alt="" className='w-26 h-9'/>
+            <img src="https://i.ibb.co/j9dTCJfP/logo1.webp" alt="" className='w-26 h-9'/>
           </Link>
           <div  className='flex bg-white rounded py-2.5 px-4 w-1/3 gap-4 items-center shadow-md shadow-gray-200'>
             
@@ -112,15 +114,6 @@ export default function Header() {
             </div >
             </Link>
 
-            <Link to={'/verification'}> {/*TODO:Route verification center page after creating it */}
-            <div className='flex flex-col place-items-center py-1 px-3 rounded cursor-pointer hover:text-primarydark hover:bg-white hover:shadow-sm shadow-gray-200 hover:transition-shadow duration-1500'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 py-1">
-                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
-              </svg>
-              <div>Center</div>
-            </div>
-            </Link>
-
             <Link to={'/calendar'}> {/*TODO:Route calendar page after creating it */}
             <div className='flex flex-col place-items-center py-1 px-3 rounded cursor-pointer hover:text-primarydark hover:bg-white hover:shadow-sm shadow-gray-200 hover:transition-shadow duration-1500'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 py-1">
@@ -133,14 +126,31 @@ export default function Header() {
           </div>
           
 
-          <div>
-            <div className='flex flex-col place-items-center py-1 px-3 rounded cursor-pointer hover:text-primarydark hover:bg-white hover:shadow-sm shadow-gray-200 hover:transition-shadow duration-1500'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 py-1">
-                <path fillRule="evenodd" d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z" clipRule="evenodd" />
-              </svg>
-          
-            </div>
-          </div>
+          <div className="relative">
+      <div
+        onClick={() => setShowDropdown(!showDropdown)}
+        className="flex flex-col place-items-center py-1 px-3 rounded cursor-pointer hover:text-primarydark hover:bg-white hover:shadow-sm shadow-gray-200 hover:transition-shadow duration-1500"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-6 py-1"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+
+      {showDropdown && (
+        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-3">
+          <p className="text-gray-700">No new notifications</p>
+        </div>
+      )}
+    </div>
 
         {/* -------------------IF user is Logged DO this Main-------------------- */}
         {!!user &&(
@@ -187,10 +197,6 @@ export default function Header() {
                 
                 <Link className="flex hover:bg-background hover:shadow py-2 pl-6 pr-8 rounded-lg" to={'/wallet'}>
                   <div>Wallet</div>
-                </Link>
-                
-                <Link className="flex hover:bg-background hover:shadow py-2 pl-6 pr-8 rounded-lg" to={'/verification'}>
-                  <div>Center</div>
                 </Link>
 
                 <Link className="flex hover:bg-background hover:shadow py-2 pl-6 pr-8 rounded-lg" to={'/calendar'}>

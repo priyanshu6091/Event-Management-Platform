@@ -20,13 +20,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
    cors({
-      credentials: true,
-      origin: "http://localhost:5173",
+     credentials: true,
+     origin: [
+       "http://localhost:5173",  // Local frontend for development
+       "https://eventmanagement.vercel.app"  // Deployed frontend on Vercel
+     ],
    })
-);
+ );
 
 mongoose.connect(process.env.MONGO_URL);
-
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {
       cb(null, "uploads/");
