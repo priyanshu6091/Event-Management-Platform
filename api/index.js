@@ -20,13 +20,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
    cors({
-      credentials: true,
-      origin: ["http://localhost:5173", "https://steady-choux-d05d47.netlify.app/"]
+     credentials: true,
+     origin: [
+       "http://localhost:5173",  // Local frontend for development
+       "https://steady-choux-d05d47.netlify.app"  // Deployed frontend on Netlify
+     ]
    })
-);
+ );
 
 mongoose.connect(process.env.MONGO_URL);
-
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {
       cb(null, "uploads/");
