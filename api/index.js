@@ -23,7 +23,7 @@ app.use(
      credentials: true,
      origin: [
        "http://localhost:5173",  // Local frontend for development
-       "https://eventmanagement.vercel.app"  // Deployed frontend on Vercel
+       "https://steady-choux-d05d47.netlify.app/"  // Deployed frontend on Vercel
      ],
    })
  );
